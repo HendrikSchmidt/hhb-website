@@ -69,13 +69,15 @@
     margin-bottom: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
   }
 
-  /* Crossbar: centred in the row gap (= D above and below the boxes). */
+  /* Crossbar: centred in the row gap (= D above and below the boxes).
+     Its ends terminate at the stem and leg, so it overshoots each by a full
+     stroke — the two strokes overlap into a solid square at every corner. */
   .crossbar {
     height: var(--hhb-stroke);
     grid-row: 3 / 4;
     align-self: center;
-    margin-left: calc(-1 * var(--hhb-d));
-    margin-right: calc(-1 * var(--hhb-d));
+    margin-left: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
+    margin-right: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
   }
 
   /* Right leg: from the crossbar down to the baseline (D below bottom box).
@@ -90,14 +92,16 @@
   }
 
   /* Bottom bar of the "b": kept a uniform D below the box (its inner edge),
-     so its outer edge lands on the baseline shared with the stem and leg. */
+     so its outer edge lands on the baseline shared with the stem and leg.
+     Like the crossbar, it overshoots the stem and leg by a full stroke so the
+     two bottom corners are solid squares. */
   .bottombar {
     height: var(--hhb-stroke);
     grid-row: 4 / 5;
     align-self: end;
     margin-bottom: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
-    margin-left: calc(-1 * var(--hhb-d));
-    margin-right: calc(-1 * var(--hhb-d));
+    margin-left: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
+    margin-right: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
   }
 
   /* ---- horizontal placement: stems sit D left, legs sit D right ---- */
@@ -158,14 +162,16 @@
       transform: translateY(calc(-1 * (var(--hhb-d) + var(--hhb-stroke))));
     }
 
-    /* crossbar -> divider: vertical, centred in the column gap (D each side). */
+    /* crossbar -> divider: vertical, centred in the column gap (D each side).
+       Its ends terminate at the top and bottom bars, so it overshoots each by
+       a full stroke (matching the left bar) for solid corner overlap. */
     .crossbar {
       width: var(--hhb-stroke);
       height: auto;
       grid-column: 3 / 4;
       align-self: stretch;
       justify-self: center;
-      margin: calc(-1 * var(--hhb-d)) 0;
+      margin: calc(-1 * (var(--hhb-d) + var(--hhb-stroke))) 0;
       transform: none;
     }
 
@@ -186,8 +192,8 @@
     }
 
     /* bottombar -> left bar: closes the "b" on the left, D left of the tile.
-       Its overshoot is (D + stroke) so it reaches into the top and bottom
-       bars, filling both left-hand corners of the bowl. */
+       Its overshoot is (D + stroke) so it reaches fully into the top and
+       bottom bars, filling both left-hand corners of the bowl. */
     .bottombar {
       width: var(--hhb-stroke);
       height: auto;
