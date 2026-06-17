@@ -142,14 +142,19 @@
         var(--grid-pad) 1fr var(--row-gap) 1fr var(--row-gap) 1fr var(--grid-pad);
     }
 
-    /* stem -> top bar: spans both tiles, sits D above the row. */
+    /* stem -> top bar: spans both tiles, sits D above the row.
+       Left overshoot matches the "b" left bar (D + stroke) so the h top
+       bars line up with the shared left edge. */
     .stem {
       width: auto;
       height: var(--hhb-stroke);
       grid-column: 2 / 5;
       align-self: start;
       justify-self: stretch;
-      margin: 0 calc(-1 * var(--hhb-d));
+      margin-top: 0;
+      margin-right: calc(-1 * var(--hhb-d));
+      margin-bottom: 0;
+      margin-left: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
       transform: translateY(calc(-1 * (var(--hhb-d) + var(--hhb-stroke))));
     }
 
