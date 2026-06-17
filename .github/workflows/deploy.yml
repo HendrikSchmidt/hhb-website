@@ -36,10 +36,10 @@ jobs:
         run: pnpm install
 
       - name: Build
-        # Custom domain: base stays '/'. For project-page testing, set BASE_PATH=/hhb-website here.
+        # Project page: /hhb-website/. Switch to BASE_PATH: / when using custom domain hhb-architekten.de.
         run: pnpm build
         env:
-          BASE_PATH: /
+          BASE_PATH: /hhb-website/
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
