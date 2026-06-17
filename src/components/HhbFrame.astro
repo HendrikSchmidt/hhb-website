@@ -27,18 +27,18 @@
 */
 ---
 <div class="hhb-frame" aria-hidden="true">
-  <span class="s stem blue-stem"></span>
-  <span class="s crossbar blue-crossbar"></span>
-  <span class="s leg blue-leg"></span>
+  <span class="s stem h1-stem"></span>
+  <span class="s crossbar h1-crossbar"></span>
+  <span class="s leg h1-leg"></span>
 
-  <span class="s stem green-stem"></span>
-  <span class="s crossbar green-crossbar"></span>
-  <span class="s leg green-leg"></span>
+  <span class="s stem h2-stem"></span>
+  <span class="s crossbar h2-crossbar"></span>
+  <span class="s leg h2-leg"></span>
 
-  <span class="s stem yellow-stem"></span>
-  <span class="s crossbar yellow-crossbar"></span>
-  <span class="s leg yellow-leg"></span>
-  <span class="s bottombar yellow-bottombar"></span>
+  <span class="s stem b-stem"></span>
+  <span class="s crossbar b-crossbar"></span>
+  <span class="s leg b-leg"></span>
+  <span class="s bottombar b-bottombar"></span>
 </div>
 
 <style>
@@ -54,7 +54,7 @@
       var(--grid-pad) 1fr var(--row-gap) 1fr var(--grid-pad);
   }
 
-  .s { display: block; }
+  .s { display: block; background: var(--blue-highlight); }
 
   /* ---- generic shapes (vertical placement + box overshoot) ---- */
 
@@ -108,23 +108,23 @@
   .stem { justify-self: end; transform: translateX(calc(-1 * var(--hhb-d))); }
   .leg  { justify-self: start; transform: translateX(var(--hhb-d)); }
 
-  /* ---- per-letter column + colour ---- */
+  /* ---- per-letter column ---- */
 
-  /* Blue "h" — column 1 */
-  .blue-stem      { grid-column: 1 / 2; background: var(--blue-highlight); }
-  .blue-crossbar  { grid-column: 2 / 3; background: var(--blue-highlight); }
-  .blue-leg       { grid-column: 3 / 4; background: var(--blue-highlight); }
+  /* First "h" — column 1 */
+  .h1-stem     { grid-column: 1 / 2; }
+  .h1-crossbar { grid-column: 2 / 3; }
+  .h1-leg      { grid-column: 3 / 4; }
 
-  /* Green "h" — column 2 */
-  .green-stem     { grid-column: 3 / 4; background: var(--blue-highlight); }
-  .green-crossbar { grid-column: 4 / 5; background: var(--blue-highlight); }
-  .green-leg      { grid-column: 5 / 6; background: var(--blue-highlight); }
+  /* Second "h" — column 2 */
+  .h2-stem     { grid-column: 3 / 4; }
+  .h2-crossbar { grid-column: 4 / 5; }
+  .h2-leg      { grid-column: 5 / 6; }
 
-  /* Yellow "b" — column 3 */
-  .yellow-stem      { grid-column: 5 / 6; background: var(--blue-highlight); }
-  .yellow-crossbar  { grid-column: 6 / 7; background: var(--blue-highlight); }
-  .yellow-leg       { grid-column: 7 / 8; background: var(--blue-highlight); }
-  .yellow-bottombar { grid-column: 6 / 7; background: var(--blue-highlight); }
+  /* "b" — column 3 */
+  .b-stem      { grid-column: 5 / 6; }
+  .b-crossbar  { grid-column: 6 / 7; }
+  .b-leg       { grid-column: 7 / 8; }
+  .b-bottombar { grid-column: 6 / 7; }
 
   /* ---- mobile: same "hhb" frame, rotated 90° clockwise ----
 
@@ -205,8 +205,8 @@
     }
 
     /* Each letter frames the left tile of its row; stacked top to bottom. */
-    .blue-stem,   .blue-crossbar,   .blue-leg                      { grid-row: 2 / 3; }
-    .green-stem,  .green-crossbar,  .green-leg                     { grid-row: 4 / 5; }
-    .yellow-stem, .yellow-crossbar, .yellow-leg, .yellow-bottombar { grid-row: 6 / 7; }
+    .h1-stem, .h1-crossbar, .h1-leg                  { grid-row: 2 / 3; }
+    .h2-stem, .h2-crossbar, .h2-leg                  { grid-row: 4 / 5; }
+    .b-stem,  .b-crossbar,  .b-leg,  .b-bottombar    { grid-row: 6 / 7; }
   }
 </style>
