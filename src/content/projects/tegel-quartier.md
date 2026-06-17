@@ -1,6 +1,6 @@
 ---
 title: "Tegel Quartier"
-category: "buerogebaeude"
+category: "buero"
 location: "Gorkistraße, Berlin-Tegel"
 year: "2016–2022"
 type: "Büro- und Geschäftsgebäude"

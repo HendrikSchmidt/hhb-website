@@ -1,6 +1,6 @@
 ---
 title: "Wohnhaus RUM, Berlin"
-category: "wohngebaeude"
+category: "wohnen"
 location: "Rummelsburger Straße, Berlin-Lichtenberg"
 year: "2019–2022"
 type: "Wohngebäude"

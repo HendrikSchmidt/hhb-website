@@ -18,7 +18,7 @@ Create a new file in `src/content/projects/` following this template:
 ```md
 ---
 title: "Projekttitel"
-category: "wohngebaeude"   # wohngebaeude | hotels | buerogebaeude | einkaufszentren
+category: "wohnen"   # gewerbe | hotel | buero | wohnen
 location: "Straße, Stadt"
 year: "2020–2023"
 type: "Wohngebäude"
@@ -40,13 +40,13 @@ Put the images in `public/images/projects/<projekt-slug>/`.
 
 ```
 /                              Landing page (6 tiles)
-/buero                         Büro
+/hhb                           hhb
 /kontakt                       Kontakt
 /impressum                     Impressum & Datenschutz
-/projekte/wohngebaeude         Project list
-/projekte/hotels
-/projekte/buerogebaeude
-/projekte/einkaufszentren
+/projekte/gewerbe              Project list
+/projekte/hotel
+/projekte/buero
+/projekte/wohnen
 /projekte/<kategorie>/<slug>   Project detail
 ```
 

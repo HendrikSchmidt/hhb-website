@@ -1,6 +1,6 @@
 ---
 title: "Schultheiss-Quartier"
-category: "einkaufszentren"
+category: "gewerbe"
 location: "Stromstraße 11–17, Berlin-Moabit"
 year: "2013–2019"
 type: "Einkaufszentrum"

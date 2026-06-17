@@ -1,13 +1,13 @@
-export type CategorySlug = 'wohngebaeude' | 'hotels' | 'buerogebaeude' | 'einkaufszentren';
+export const categories = [
+  { slug: 'buero',   title: 'Büro' },
+  { slug: 'gewerbe', title: 'Gewerbe' },
+  { slug: 'hotel',   title: 'Hotel' },
+  { slug: 'wohnen',  title: 'Wohnen' },
+] as const;
 
-export interface Category {
-  slug: CategorySlug;
-  title: string;
-}
+export type CategorySlug = (typeof categories)[number]['slug'];
 
-export const categories: Category[] = [
-  { slug: 'wohngebaeude',    title: 'Wohngebäude' },
-  { slug: 'hotels',          title: 'Hotels' },
-  { slug: 'buerogebaeude',   title: 'Bürogebäude' },
-  { slug: 'einkaufszentren', title: 'Einkaufszentren' },
+export const categorySlugs = categories.map((c) => c.slug) as [
+  CategorySlug,
+  ...CategorySlug[],
 ];

@@ -1,6 +1,6 @@
 ---
 title: "Aletto Hotel, Berlin"
-category: "hotels"
+category: "hotel"
 location: "Luckenwalder Straße 12, Berlin-Kreuzberg"
 year: "2016–2020"
 type: "Hotel"

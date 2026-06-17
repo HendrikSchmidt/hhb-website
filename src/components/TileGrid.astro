@@ -1,22 +1,25 @@
 ---
 import Tile from './Tile.astro';
 import HhbFrame from './HhbFrame.astro';
+import { categories } from '../lib/categories';
 import { withBase } from '../lib/url';
 
+const cat = Object.fromEntries(categories.map(c => [c.slug, c]));
+
 const tiles = [
-  { title: 'Büro',            href: withBase('/buero'),                     accent: 'var(--blue)' },
-  { title: 'Einkaufszentren', href: withBase('/projekte/einkaufszentren'),  accent: 'var(--green)' },
-  { title: 'Hotels',          href: withBase('/projekte/hotels'),           accent: 'var(--yellow)' },
-  { title: 'Kontakt',         href: withBase('/kontakt'),                   accent: 'var(--blue)' },
-  { title: 'Bürogebäude',     href: withBase('/projekte/buerogebaeude'),    accent: 'var(--green)' },
-  { title: 'Wohngebäude',     href: withBase('/projekte/wohngebaeude'),     accent: 'var(--yellow)' },
+  { title: 'hhb',              href: withBase('/hhb'),                    accent: 'var(--blue)' },
+  { title: cat.buero.title,    href: withBase('/projekte/buero'),         accent: 'var(--green)' },
+  { title: cat.gewerbe.title,  href: withBase('/projekte/gewerbe'),       accent: 'var(--green)' },
+  { title: 'Kontakt',          href: withBase('/kontakt'),                accent: 'var(--blue)' },
+  { title: cat.hotel.title,    href: withBase('/projekte/hotel'),         accent: 'var(--yellow)' },
+  { title: cat.wohnen.title,   href: withBase('/projekte/wohnen'),        accent: 'var(--yellow)' },
 ];
 ---
 
 <div class="grid-wrapper">
   <HhbFrame />
   <div class="tile-grid">
-    {tiles.map(t => <Tile title={t.title} href={t.href} accent={t.accent} />)}
+    {tiles.map(t => <Tile title={t.title} href={t.href} accent={t.accent} highlightTitle={t.title === 'hhb'} />)}
   </div>
 </div>
 
@@ -51,12 +54,12 @@ const tiles = [
       grid-template-columns: repeat(2, 1fr);
       /* Transpose of the 3×2 desktop grid so row-major mobile flow matches
          desktop column order: top-left, bottom-left, top-middle, … */
-      .tile:nth-child(1) { order: 1; } /* Büro */
-      .tile:nth-child(2) { order: 3; } /* Einkaufszentren */
-      .tile:nth-child(3) { order: 5; } /* Hotels */
+      .tile:nth-child(1) { order: 1; } /* hhb */
+      .tile:nth-child(2) { order: 3; } /* Büro */
+      .tile:nth-child(3) { order: 4; } /* Gewerbe */
       .tile:nth-child(4) { order: 2; } /* Kontakt */
-      .tile:nth-child(5) { order: 4; } /* Bürogebäude */
-      .tile:nth-child(6) { order: 6; } /* Wohngebäude */
+      .tile:nth-child(5) { order: 5; } /* Hotel */
+      .tile:nth-child(6) { order: 6; } /* Wohnen */
     }
   }
 </style>
