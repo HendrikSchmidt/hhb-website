@@ -1,0 +1,57 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout title="Kontakt">
+  <nav><a href={withBase('/')}>← Zurück</a></nav>
+
+  <article>
+      <h1>Kontakt</h1>
+      <address>
+        <p>hhb architekten GmbH</p>
+        <p>Pariser Straße 44</p>
+        <p>10707 Berlin</p>
+        <p><a href="tel:+493088459500">030 8845950</a></p>
+        <p>Fax: 030 8819052</p>
+        <p><a href="mailto:mail@hhb-architekten.de">mail@hhb-architekten.de</a></p>
+      </address>
+  </article>
+</BaseLayout>
+
+<style>
+  nav {
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--red);
+  }
+
+  address {
+    font-style: normal;
+  }
+
+  address p {
+    font-size: 0.95rem;
+    line-height: 1.8;
+    color: var(--text);
+  }
+
+  address a {
+    color: var(--text);
+  }
+
+  address a:hover {
+    text-decoration: underline;
+  }
+</style>

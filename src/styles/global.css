@@ -1,0 +1,63 @@
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+:root {
+  --red: #d12b1f;
+  --blue: #5cb8e6;
+  --green: #7cc36a;
+  --yellow: #f5c518;
+  --bg: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #666;
+  --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+
+  /* Shared grid geometry — used by both the tile grid and the hhb frame
+     overlay so the coloured strokes always align with the tile gutters.
+     --hhb-d is the gap kept between every coloured stroke and the boxes.
+     The column/row gaps are derived from it so that gap stays uniform:
+       row gap   = D + stroke + D            (one centred crossbar)
+       column gap= D + stroke + space + stroke + D (two stems, one per letter) */
+  --grid-pad: 2rem;
+  --hhb-stroke: clamp(8px, 1.4vw, 16px);
+  --hhb-d: 1rem;
+  --row-gap: calc(2 * var(--hhb-d) + var(--hhb-stroke));
+  --col-gap: calc(2 * var(--hhb-d) + 2 * var(--hhb-stroke) + 1.5rem);
+
+  /* Shared content width for every page. The index tile grid, the sub-page
+     text column and the footer all line up to this box. --page-padding-x is
+     kept equal to --grid-pad so the sub-page content edge aligns with the
+     index tile edge. */
+  --content-max-width: 1200px;
+  --page-padding-x: var(--grid-pad);
+}
+
+@media (max-width: 600px) {
+  :root {
+    --page-padding-x: 1.25rem;
+  }
+}
+
+html {
+  font-family: var(--font);
+  background: var(--bg);
+  color: var(--text);
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+}
+
+body {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+img {
+  display: block;
+  max-width: 100%;
+}

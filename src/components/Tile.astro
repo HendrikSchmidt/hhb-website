@@ -1,0 +1,39 @@
+---
+interface Props {
+  title: string;
+  href: string;
+  accent?: string;
+}
+const { title, href, accent } = Astro.props;
+---
+
+<a class="tile" href={href} style={accent ? `--accent: ${accent}` : undefined}>
+  <span class="tile-title">{title}</span>
+</a>
+
+<style>
+  .tile {
+    display: block;
+    position: relative;
+    width: 100%;
+    aspect-ratio: 1 / 1;
+    border: 2px solid var(--red);
+    background: var(--bg);
+    transition: background 0.15s ease;
+  }
+
+  .tile:hover {
+    background: #fdf3f2;
+  }
+
+  .tile-title {
+    position: absolute;
+    bottom: 0.6rem;
+    left: 0.7rem;
+    font-size: clamp(0.8rem, 1.4vw, 1.2rem);
+    font-weight: 400;
+    color: var(--red);
+    letter-spacing: 0.01em;
+    line-height: 1.2;
+  }
+</style>

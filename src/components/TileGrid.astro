@@ -1,0 +1,62 @@
+---
+import Tile from './Tile.astro';
+import HhbFrame from './HhbFrame.astro';
+import { withBase } from '../lib/url';
+
+const tiles = [
+  { title: 'Büro',            href: withBase('/buero'),                     accent: 'var(--blue)' },
+  { title: 'Einkaufszentren', href: withBase('/projekte/einkaufszentren'),  accent: 'var(--green)' },
+  { title: 'Hotels',          href: withBase('/projekte/hotels'),           accent: 'var(--yellow)' },
+  { title: 'Kontakt',         href: withBase('/kontakt'),                   accent: 'var(--blue)' },
+  { title: 'Bürogebäude',     href: withBase('/projekte/buerogebaeude'),    accent: 'var(--green)' },
+  { title: 'Wohngebäude',     href: withBase('/projekte/wohngebaeude'),     accent: 'var(--yellow)' },
+];
+---
+
+<div class="grid-wrapper">
+  <HhbFrame />
+  <div class="tile-grid">
+    {tiles.map(t => <Tile title={t.title} href={t.href} accent={t.accent} />)}
+  </div>
+</div>
+
+<style>
+  .grid-wrapper {
+    position: relative;
+    width: 100%;
+    max-width: var(--content-max-width);
+    margin: 0 auto;
+  }
+
+  .tile-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    column-gap: var(--col-gap);
+    row-gap: var(--row-gap);
+    position: relative;
+    z-index: 1;
+    padding: var(--grid-pad);
+  }
+
+  @media (max-width: 600px) {
+    /* The frame is rotated 90°, so the gap roles swap: the column gap now
+       holds a single divider (D + stroke + D) and the row gap holds the
+       space between two stacked letters. */
+    .grid-wrapper {
+      --col-gap: calc(2 * var(--hhb-d) + var(--hhb-stroke));
+      --row-gap: calc(2 * var(--hhb-d) + 2 * var(--hhb-stroke) + 1.5rem);
+    }
+
+    .tile-grid {
+      grid-template-columns: repeat(2, 1fr);
+      /* Transpose of the 3×2 desktop grid so row-major mobile flow matches
+         desktop column order: top-left, bottom-left, top-middle, … */
+      .tile:nth-child(1) { order: 1; } /* Büro */
+      .tile:nth-child(2) { order: 3; } /* Einkaufszentren */
+      .tile:nth-child(3) { order: 5; } /* Hotels */
+      .tile:nth-child(4) { order: 2; } /* Kontakt */
+      .tile:nth-child(5) { order: 4; } /* Bürogebäude */
+      .tile:nth-child(6) { order: 6; } /* Wohngebäude */
+    }
+  }
+</style>

@@ -1,0 +1,116 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import { withBase } from '../lib/url';
+---
+
+<BaseLayout title="Büro">
+  <nav><a href={withBase('/')}>← Zurück</a></nav>
+
+  <article>
+      <h1>hhb architekten</h1>
+
+      <p>
+        Die hhb architekten GmbH wurde 2024 gegründet. Die Gesellschafter und Mitarbeiter verfügen
+        über langjährige Erfahrungen aus ihrer Tätigkeit für die Pechtold Gesellschaft von
+        Architekten mbH und führen zahlreiche Projektbeziehungen und Fachkompetenzen in der
+        hhb architekten GmbH fort.
+      </p>
+      <p>
+        In Zusammenarbeit mit Immobilienfonds, Investoren, Projektentwicklern,
+        Generalübernehmern, Stiftungen und privaten Bauherrn hat sich die hhb architekten GmbH
+        eine breite Basis für ihre Tätigkeiten geschaffen. Zu den realisierten Projekten zählen
+        unter anderem Einkaufszentren, Hotels, Bürogebäude und Wohngebäude.
+      </p>
+      <p>
+        Unser Team verfügt über umfangreiche Erfahrungen in der Planung, Genehmigung und
+        Realisierung von Bauvorhaben unterschiedlicher Größenordnung.
+      </p>
+
+      <h2>Leistungen</h2>
+      <ul>
+        <li>Objektplanung Gebäude gemäß HOAI Leistungsphasen 1–9</li>
+        <li>Projektentwicklung und Machbarkeitsstudien</li>
+        <li>Neubauten</li>
+        <li>Umbauten und Sanierungen</li>
+        <li>Bauen im Bestand</li>
+        <li>Denkmalgerechte Instandsetzung</li>
+        <li>Bestandsaufnahme und Dokumentation</li>
+      </ul>
+
+      <p>
+        Das Know-how, wirtschaftliche Planung mit Gestaltung zu verbinden, ist eine
+        herausragende Fähigkeit des Büros. Für die Erfahrung, komplexe Bauvorhaben kompetent
+        durch die unterschiedlichen Genehmigungsinstanzen zur Realisierung zu führen, wird das
+        Büro bei den Auftraggebern sehr geschätzt.
+      </p>
+      <p>
+        Mit dem Ziel einer dauerhaften Qualität arbeitet jeder in unserem Unternehmen in seiner
+        Funktion engagiert für unsere Auftraggeber. Wir legen großen Wert auf eine intensive
+        Beratung und Betreuung unserer Auftraggeber.
+      </p>
+      <p>
+        Planung ist die Seele unseres Geschäfts. Eine qualitativ hochwertige Planung besteht für
+        uns aus zwei Bausteinen: der kreativen architektonischen Planung und der Planung des
+        Prozesses, dem Projektmanagement. Nur wenn beides auf höchstem Niveau geschieht, haben
+        wir unser Ziel einer exzellenten Leistung für unsere Auftraggeber erreicht.
+      </p>
+      <p>
+        Unsere architektonischen Lösungen sind zeitgemäß. Zeitgemäß heißt für uns, dass
+        gesellschaftliche Entwicklungen in unsere Arbeit einfließen und unsere Lösungen prägen.
+      </p>
+  </article>
+</BaseLayout>
+
+<style>
+  nav {
+    margin-bottom: 2rem;
+    font-size: 0.85rem;
+    color: var(--text-muted);
+  }
+
+  nav a:hover {
+    text-decoration: underline;
+  }
+
+  h1 {
+    font-size: 1.4rem;
+    font-weight: 400;
+    margin-bottom: 1.5rem;
+    color: var(--red);
+  }
+
+  h2 {
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    margin: 2rem 0 0.75rem;
+    color: var(--text-muted);
+  }
+
+  p {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    margin-bottom: 1rem;
+    color: var(--text);
+  }
+
+  ul {
+    list-style: none;
+    margin-bottom: 1.5rem;
+  }
+
+  ul li {
+    font-size: 0.95rem;
+    line-height: 1.7;
+    padding-left: 1rem;
+    position: relative;
+  }
+
+  ul li::before {
+    content: '–';
+    position: absolute;
+    left: 0;
+    color: var(--text-muted);
+  }
+</style>

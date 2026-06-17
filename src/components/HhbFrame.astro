@@ -1,0 +1,199 @@
+---
+/*
+  "hhb" frame overlay.
+
+  A CSS grid whose tracks match the tile grid exactly:
+
+    columns: pad | tile1 | col-gap | tile2 | col-gap | tile3 | pad
+    rows:    pad | row1  | row-gap | row2  | pad
+
+  Every coloured stroke is kept a uniform distance --hhb-d (D) away from the
+  boxes, so the gaps between the letters and the tiles are all equal. Each
+  letter is one colour and shaped like a real lowercase letter:
+
+    "h" = tall left stem (D left of the column, spanning both rows)
+          + a crossbar D above the bottom box
+          + a right leg D right of the bottom box, dropping to the baseline
+    "b" = the same, plus a bottom bar D below the bottom box (closed bowl)
+
+  So each letter frames its BOTTOM tile on three sides (h) or four sides (b),
+  with the stem rising past the top tile — which reads as h / h / b.
+
+  Offsets:
+    • vertical strokes use justify-self + translateX(±D) for the side gap
+    • horizontal strokes use negative margins to reach exactly to the stem
+      and leg, and stems/legs use negative margins to overshoot the boxes by D
+      (giving the uniform top line and baseline).
+*/
+---
+<div class="hhb-frame" aria-hidden="true">
+  <span class="s stem blue-stem"></span>
+  <span class="s crossbar blue-crossbar"></span>
+  <span class="s leg blue-leg"></span>
+
+  <span class="s stem green-stem"></span>
+  <span class="s crossbar green-crossbar"></span>
+  <span class="s leg green-leg"></span>
+
+  <span class="s stem yellow-stem"></span>
+  <span class="s crossbar yellow-crossbar"></span>
+  <span class="s leg yellow-leg"></span>
+  <span class="s bottombar yellow-bottombar"></span>
+</div>
+
+<style>
+  .hhb-frame {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    pointer-events: none;
+    display: grid;
+    grid-template-columns:
+      var(--grid-pad) 1fr var(--col-gap) 1fr var(--col-gap) 1fr var(--grid-pad);
+    grid-template-rows:
+      var(--grid-pad) 1fr var(--row-gap) 1fr var(--grid-pad);
+  }
+
+  .s { display: block; }
+
+  /* ---- generic shapes (vertical placement + box overshoot) ---- */
+
+  /* Full-height stem: spans both rows, overshoots D above and (D + stroke)
+     below. The extra stroke keeps the baseline level with the bottom bar,
+     whose inner edge must sit a uniform D away from the box. */
+  .stem {
+    width: var(--hhb-stroke);
+    grid-row: 2 / 5;
+    align-self: stretch;
+    margin-top: calc(-1 * var(--hhb-d));
+    margin-bottom: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
+  }
+
+  /* Crossbar: centred in the row gap (= D above and below the boxes). */
+  .crossbar {
+    height: var(--hhb-stroke);
+    grid-row: 3 / 4;
+    align-self: center;
+    margin-left: calc(-1 * var(--hhb-d));
+    margin-right: calc(-1 * var(--hhb-d));
+  }
+
+  /* Right leg: from the crossbar down to the baseline (D below bottom box).
+     Reaches up to the crossbar's TOP edge (row-gap/2 + stroke/2) so the
+     corner where it meets the crossbar is fully filled. */
+  .leg {
+    width: var(--hhb-stroke);
+    grid-row: 4 / 5;
+    align-self: stretch;
+    margin-top: calc(-1 * (var(--row-gap) + var(--hhb-stroke)) / 2);
+    margin-bottom: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
+  }
+
+  /* Bottom bar of the "b": kept a uniform D below the box (its inner edge),
+     so its outer edge lands on the baseline shared with the stem and leg. */
+  .bottombar {
+    height: var(--hhb-stroke);
+    grid-row: 4 / 5;
+    align-self: end;
+    margin-bottom: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
+    margin-left: calc(-1 * var(--hhb-d));
+    margin-right: calc(-1 * var(--hhb-d));
+  }
+
+  /* ---- horizontal placement: stems sit D left, legs sit D right ---- */
+  .stem { justify-self: end; transform: translateX(calc(-1 * var(--hhb-d))); }
+  .leg  { justify-self: start; transform: translateX(var(--hhb-d)); }
+
+  /* ---- per-letter column + colour ---- */
+
+  /* Blue "h" — column 1 */
+  .blue-stem      { grid-column: 1 / 2; background: var(--blue); }
+  .blue-crossbar  { grid-column: 2 / 3; background: var(--blue); }
+  .blue-leg       { grid-column: 3 / 4; background: var(--blue); }
+
+  /* Green "h" — column 2 */
+  .green-stem     { grid-column: 3 / 4; background: var(--green); }
+  .green-crossbar { grid-column: 4 / 5; background: var(--green); }
+  .green-leg      { grid-column: 5 / 6; background: var(--green); }
+
+  /* Yellow "b" — column 3 */
+  .yellow-stem      { grid-column: 5 / 6; background: var(--yellow); }
+  .yellow-crossbar  { grid-column: 6 / 7; background: var(--yellow); }
+  .yellow-leg       { grid-column: 7 / 8; background: var(--yellow); }
+  .yellow-bottombar { grid-column: 6 / 7; background: var(--yellow); }
+
+  /* ---- mobile: same "hhb" frame, rotated 90° clockwise ----
+
+     The mobile tile grid is the transpose of the desktop one (2 columns ×
+     3 rows), so the whole frame is turned a quarter-turn clockwise. Each
+     letter now frames the LEFT tile of one row (instead of the bottom tile
+     of one column), and the three letters stack top-to-bottom:
+
+       stem      -> top bar    (full width, D above the row)
+       crossbar  -> divider    (vertical, centred in the column gap)
+       leg       -> bottom bar  (D below the framed tile)
+       bottombar -> left bar    (closes the "b" on the left)
+  */
+  @media (max-width: 600px) {
+    .hhb-frame {
+      grid-template-columns:
+        var(--grid-pad) 1fr var(--col-gap) 1fr var(--grid-pad);
+      grid-template-rows:
+        var(--grid-pad) 1fr var(--row-gap) 1fr var(--row-gap) 1fr var(--grid-pad);
+    }
+
+    /* stem -> top bar: spans both tiles, sits D above the row. */
+    .stem {
+      width: auto;
+      height: var(--hhb-stroke);
+      grid-column: 2 / 5;
+      align-self: start;
+      justify-self: stretch;
+      margin: 0 calc(-1 * var(--hhb-d));
+      transform: translateY(calc(-1 * (var(--hhb-d) + var(--hhb-stroke))));
+    }
+
+    /* crossbar -> divider: vertical, centred in the column gap (D each side). */
+    .crossbar {
+      width: var(--hhb-stroke);
+      height: auto;
+      grid-column: 3 / 4;
+      align-self: stretch;
+      justify-self: center;
+      margin: calc(-1 * var(--hhb-d)) 0;
+      transform: none;
+    }
+
+    /* leg -> bottom bar: from the left edge to the divider, D below the tile. */
+    .leg {
+      width: auto;
+      height: var(--hhb-stroke);
+      grid-column: 2 / 3;
+      align-self: end;
+      justify-self: stretch;
+      margin-top: 0;
+      margin-bottom: 0;
+      margin-left: calc(-1 * var(--hhb-d));
+      margin-right: calc(-1 * (var(--col-gap) + var(--hhb-stroke)) / 2);
+      transform: translateY(calc(var(--hhb-d) + var(--hhb-stroke)));
+    }
+
+    /* bottombar -> left bar: closes the "b" on the left, D left of the tile.
+       Its overshoot is (D + stroke) so it reaches into the top and bottom
+       bars, filling both left-hand corners of the bowl. */
+    .bottombar {
+      width: var(--hhb-stroke);
+      height: auto;
+      grid-column: 2 / 3;
+      align-self: stretch;
+      justify-self: start;
+      margin: calc(-1 * (var(--hhb-d) + var(--hhb-stroke))) 0;
+      transform: translateX(calc(-1 * (var(--hhb-d) + var(--hhb-stroke))));
+    }
+
+    /* Each letter frames the left tile of its row; stacked top to bottom. */
+    .blue-stem,   .blue-crossbar,   .blue-leg                      { grid-row: 2 / 3; }
+    .green-stem,  .green-crossbar,  .green-leg                     { grid-row: 4 / 5; }
+    .yellow-stem, .yellow-crossbar, .yellow-leg, .yellow-bottombar { grid-row: 6 / 7; }
+  }
+</style>
