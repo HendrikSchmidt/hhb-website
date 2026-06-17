@@ -14,7 +14,7 @@
   --bg: #ffffff;
   --text: #1a1a1a;
   --text-muted: #666;
-  --font: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+  --font: 'Arial Nova', Arial, sans-serif;
 
   /* Shared grid geometry — used by both the tile grid and the hhb frame
      overlay so the coloured strokes always align with the tile gutters.
