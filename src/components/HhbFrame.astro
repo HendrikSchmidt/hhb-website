@@ -164,7 +164,9 @@
       transform: none;
     }
 
-    /* leg -> bottom bar: from the left edge to the divider, D below the tile. */
+    /* leg -> bottom bar: from the left edge to the divider, D below the tile.
+       Left overshoot matches the "b" left bar (D + stroke) so all three
+       letter baselines line up. */
     .leg {
       width: auto;
       height: var(--hhb-stroke);
@@ -173,7 +175,7 @@
       justify-self: stretch;
       margin-top: 0;
       margin-bottom: 0;
-      margin-left: calc(-1 * var(--hhb-d));
+      margin-left: calc(-1 * (var(--hhb-d) + var(--hhb-stroke)));
       margin-right: calc(-1 * (var(--col-gap) + var(--hhb-stroke)) / 2);
       transform: translateY(calc(var(--hhb-d) + var(--hhb-stroke)));
     }
