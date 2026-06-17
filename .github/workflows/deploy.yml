@@ -39,7 +39,7 @@ jobs:
         # Project page: /hhb-website/. Switch to BASE_PATH: / when using custom domain hhb-architekten.de.
         run: pnpm build
         env:
-          BASE_PATH: /hhb-website/
+          BASE_PATH: /
 
       - name: Upload Pages artifact
         uses: actions/upload-pages-artifact@v3
